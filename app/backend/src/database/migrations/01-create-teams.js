@@ -8,6 +8,7 @@ module.exports = {
           type: Sequelize.INTEGER
         },
         teamName: {
+          field: 'team_name',
           allowNull: false,
           type: Sequelize.STRING(255),
         },
