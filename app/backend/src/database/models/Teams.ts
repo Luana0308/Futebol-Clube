@@ -2,7 +2,7 @@ import { Model, STRING, INTEGER } from 'sequelize';
 import db from '.';
 
 class Teams extends Model {
-  id: number;
+  id?: number;
   teamName: string;
 }
 Teams.init({
