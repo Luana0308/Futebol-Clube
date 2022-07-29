@@ -30,7 +30,7 @@ describe('Testando o login', () => {
     (Users.findOne as sinon.SinonStub).restore();
   })
 
-  it('resposta do login', async () => {
+  it('resposta do post/login', async () => {
     chaiHttpResponse = await chai
        .request(app).post('/login')
        .send({
@@ -42,4 +42,17 @@ describe('Testando o login', () => {
     expect(chaiHttpResponse.body).to.have.property('token')
 
   });
+
+  it('resposta get/login/validate', async () => {
+    const responseLogin = await chai.request(app).post('/login').send({
+      email: "admin@admin.com",
+      password: "secret_admin"
+    });
+
+    chaiHttpResponse = await chai
+    .request(app).get('/login/validate').set('Authorization', responseLogin.body.token);
+
+ expect(chaiHttpResponse.status).to.be.equal(200)
+ expect(chaiHttpResponse.body).to.have.property('role')
+  })
 });
