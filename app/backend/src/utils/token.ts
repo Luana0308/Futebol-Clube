@@ -1,6 +1,7 @@
 import { sign, SignOptions, verify } from 'jsonwebtoken';
 import 'dotenv/config';
 import { IUser } from '../interfaces/User';
+import HttpException from './httpExpeption';
 
 const SECRET = process.env.JWT_SECRET || 'jwt_secret';
 
@@ -9,22 +10,20 @@ const jwtConfig: SignOptions = {
   algorithm: 'HS256',
 };
 
-const generateJWTToken = (user: Omit<IUser, 'password'>) => sign(user, SECRET, jwtConfig);
+const generateJwtToken = (user: Omit<IUser, 'password'>) => sign(user, SECRET, jwtConfig);
 
 const authenticateToken = (token: string) => {
   if (!token) {
-    const messageError = { status: 401, message: 'Token not found'}
-    throw messageError;
+    throw new HttpException(401, 'Token not found');
   }
   try {
     const introspection = verify(token, SECRET, jwtConfig);
     return introspection;
   } catch (erro) {
-    const invalidToken = { status: 401, message: 'Expired or invalid token' }
-    throw invalidToken;
+    throw new HttpException(401, 'Expired or invalid token');
   }
 };
 
-export default {
-  generateJWTToken,
+export {
+  generateJwtToken,
   authenticateToken };
