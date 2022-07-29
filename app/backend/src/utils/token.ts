@@ -12,7 +12,7 @@ const jwtConfig: SignOptions = {
 
 const generateJwtToken = (user: Omit<IUser, 'password'>) => sign(user, SECRET, jwtConfig);
 
-const authenticateToken = (token: string) => {
+const authenticateToken = (token: string | undefined) => {
   if (!token) {
     throw new HttpException(401, 'Token not found');
   }

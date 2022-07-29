@@ -29,6 +29,12 @@ const loginUser = async (body: IUserLogin) => {
   return tokenCreate;
 };
 
+const roleUserService = async (token: IUser) => {
+  const { role } = token;
+  return { role };
+};
+
 export default {
   loginUser,
+  roleUserService,
 };

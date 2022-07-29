@@ -6,4 +6,9 @@ const loginController = async (req: Request, res: Response): Promise<Response | 
   return res.status(200).json({ token });
 };
 
-export default { loginController };
+const roleUserController = async (_req: Request, res: Response): Promise<Response | void> => {
+  const role = await service.roleUserService(res.locals.payload);
+  return res.status(200).json(role);
+};
+
+export default { loginController, roleUserController };

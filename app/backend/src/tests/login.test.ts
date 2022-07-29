@@ -42,8 +42,4 @@ describe('Testando o login', () => {
     expect(chaiHttpResponse.body).to.have.property('token')
 
   });
-
-//   it('Seu sub-teste', () => {
-//     expect(false).to.be.eq(true);
-//   });
 });
