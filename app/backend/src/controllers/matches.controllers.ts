@@ -6,12 +6,13 @@ const getAllMatches = async (req: Request, res: Response): Promise<Response> => 
   return res.status(200).json(matches);
 };
 
-// const getMatchesByQuery = async (req: Request, res: Response): Promise<Response | void> => {
-//   const matchesFilter = await service.getMatchesByQuery(req.query);
-//   return res.status(200).json(matchesFilter);
-// };
+const matchesInProgress = async (req: Request, res: Response): Promise<Response> => {
+  const matches = await service.matchesInProgress(req.body);
+  return res.status(201).json(matches);
+};
 
 export default {
   getAllMatches,
-  // getMatchesByQuery,
+  matchesInProgress,
+
 };

@@ -1,6 +1,6 @@
 import Teams from '../database/models/Teams';
 import Matches from '../database/models/Matches';
-import { IMacthesFilter } from '../interfaces/Matches';
+import { IMacthesFilter, IMatchesBody, IMatchesCreate } from '../interfaces/Matches';
 
 const getAllMatches = async (query: IMacthesFilter) => {
   const include = [
@@ -23,6 +23,18 @@ const getAllMatches = async (query: IMacthesFilter) => {
   return matches;
 };
 
+const matchesInProgress = async (body: IMatchesBody): Promise<IMatchesCreate> => {
+  const createMatches = await Matches.create({
+    homeTeam: body.homeTeam,
+    homeTeamGoals: body.homeTeamGoals,
+    awayTeam: body.awayTeam,
+    awayTeamGoals: body.homeTeamGoals,
+    inProgress: true,
+  });
+  return createMatches;
+};
+
 export default {
   getAllMatches,
+  matchesInProgress,
 };
