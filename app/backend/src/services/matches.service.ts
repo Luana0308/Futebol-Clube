@@ -25,11 +25,16 @@ const getAllMatches = async (query: IMacthesFilter) => {
 };
 
 const matchesInProgress = async (body: IMatchesBody): Promise<IMatchesCreate> => {
+  const { homeTeam, homeTeamGoals, awayTeam, awayTeamGoals } = body;
+
+  if (homeTeam === awayTeam) {
+    throw new HttpException(401, 'It is not possible to create a match with two equal teams');
+  }
   const createMatches = await Matches.create({
-    homeTeam: body.homeTeam,
-    homeTeamGoals: body.homeTeamGoals,
-    awayTeam: body.awayTeam,
-    awayTeamGoals: body.homeTeamGoals,
+    homeTeam,
+    homeTeamGoals,
+    awayTeam,
+    awayTeamGoals,
     inProgress: true,
   });
   return createMatches;
