@@ -20,7 +20,7 @@ const authenticateToken = (token: string | undefined) => {
     const introspection = verify(token, SECRET, jwtConfig);
     return introspection;
   } catch (erro) {
-    throw new HttpException(401, 'Expired or invalid token');
+    throw new HttpException(401, 'Token must be a valid token');
   }
 };
 
