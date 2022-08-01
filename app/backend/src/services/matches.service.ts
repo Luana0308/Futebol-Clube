@@ -30,6 +30,7 @@ const matchesInProgress = async (body: IMatchesBody): Promise<IMatchesCreate> =>
   if (homeTeam === awayTeam) {
     throw new HttpException(401, 'It is not possible to create a match with two equal teams');
   }
+  if (!homeTeam || !awayTeam) { throw new HttpException(404, 'There is no team with such id!'); }
   const createMatches = await Matches.create({
     homeTeam,
     homeTeamGoals,

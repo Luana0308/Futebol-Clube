@@ -8,7 +8,7 @@ const authToken = (req: Request, res: Response, next: NextFunction) => {
 
   const payload = authenticateToken(token);
   if (!payload) {
-    throw new HttpException(401, 'Expired or invalid token');
+    throw new HttpException(401, 'Token must be a valid token');
   }
   res.locals.payload = payload;
 
