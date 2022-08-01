@@ -17,3 +17,7 @@ export interface IMatchesCreate {
   inProgress: boolean,
 
 }
+
+export interface IMacthesId {
+  id: number | undefined
+}
