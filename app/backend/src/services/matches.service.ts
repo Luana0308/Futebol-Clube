@@ -1,7 +1,11 @@
 import HttpException from '../utils/httpExpeption';
 import Teams from '../database/models/Teams';
 import Matches from '../database/models/Matches';
-import { IMacthesFilter, IMatchesBody, IMatchesCreate } from '../interfaces/Matches';
+import {
+  IMacthesFilter,
+  IMatchesBody,
+  IMatchesCreate,
+  IMatchesGoalsBody } from '../interfaces/Matches';
 
 const getAllMatches = async (query: IMacthesFilter) => {
   const include = [
@@ -54,8 +58,21 @@ const matchesUpdateFinish = async (id: number) => {
   return { message: 'Finished' };
 };
 
+const macthesUpdateGoals = async (id: number, body: IMatchesGoalsBody) => {
+  const { homeTeamGoals, awayTeamGoals } = body;
+  const matches = await Matches.findOne({ where: { id } });
+  if (!matches) throw new HttpException(400, 'not found matches');
+
+  const updateGoals = await Matches.update({
+    homeTeamGoals,
+    awayTeamGoals,
+  }, { where: { id } });
+  return updateGoals;
+};
+
 export default {
   getAllMatches,
   matchesInProgress,
   matchesUpdateFinish,
+  macthesUpdateGoals,
 };

@@ -34,7 +34,7 @@ afterEach(async () => {
 
 
 describe(getRequirement(28), () => {
-  it('Será avaliado que é possível alterar o resultado de uma partida', async () => {
+  it.only('Será avaliado que é possível alterar o resultado de uma partida', async () => {
     await page.waitForTimeout(puppeteerDefs.pause.brief);
 
     const headerButtonLogin = await page.$(header.loginButton);

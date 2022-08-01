@@ -21,3 +21,8 @@ export interface IMatchesCreate {
 export interface IMacthesId {
   id: number | undefined
 }
+
+export interface IMatchesGoalsBody {
+  homeTeamGoals: number,
+  awayTeamGoals: number,
+}

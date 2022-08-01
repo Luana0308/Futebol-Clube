@@ -17,9 +17,16 @@ const matchesUpdateFinish = async (req: Request, res: Response): Promise<Respons
   return res.status(200).json(matches);
 };
 
+const macthesUpdateGoals = async (req: Request, res: Response): Promise<Response> => {
+  const { id } = req.params;
+  const matches = await service.macthesUpdateGoals(Number(id), req.body);
+  return res.status(200).json(matches);
+};
+
 export default {
   getAllMatches,
   matchesInProgress,
   matchesUpdateFinish,
+  macthesUpdateGoals,
 
 };

@@ -6,6 +6,7 @@ const routesMatches = express.Router();
 
 routesMatches.get('/', controller.getAllMatches);
 routesMatches.post('/', authToken, controller.matchesInProgress);
+routesMatches.patch('/:id', controller.macthesUpdateGoals);
 routesMatches.patch('/:id/finish', controller.matchesUpdateFinish);
 
 export default routesMatches;
