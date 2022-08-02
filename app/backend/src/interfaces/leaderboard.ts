@@ -9,7 +9,15 @@ export interface ILeaderboard {
     teamName: string
   }
 }
-
-// export interface ILeaderboardList {
-
-// }
+export interface IResultGames {
+  name: string,
+  totalPoints:number,
+  totalGames: number,
+  totalVictories: number,
+  totalDraws: number,
+  totalLosses: number,
+  goalsFavor: number,
+  goalsOwn: number,
+  goalsBalance: number,
+  efficiency: number
+}
